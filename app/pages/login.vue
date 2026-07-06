@@ -8,7 +8,49 @@ const isSubmitingLogin = ref<boolean>(false);
 const email = ref<string>('');
 
 const handleLogin = async () => {
-  //handle the login 
+  isSubmitingLogin.value = true;
+  try {
+    const response: any = await $fetch(`https://eventos.tbr.com.br/apis/login/?evento=${siteStore.eventId}&email=${email.value}`);
+    const data = JSON.parse(response);
+    if (!data || data.estado != 1) {
+      throw new Error('Não foi possível realizar o login, verifique seu email!');
+    }
+
+    let dados = data.dados;
+
+    siteStore.login({
+      isEnabled: dados.enable == 1 ? true : false,
+      firstname: dados.firstname,
+      lastname: dados.lastname,
+      email: dados.email,
+      category: dados.subscribe_training_center,
+      userId: dados.id,
+      userHash: dados.control_hash,
+      userCity: dados.city,
+      userState: dados.state,
+      userIp: dados.ip
+    })
+
+    await showAlert({
+      title: 'Sucesso',
+      message: 'Login realizado com sucesso!',
+      type: 'success'
+    })
+
+    email.value = '';
+
+    await navigateTo({
+      path: '/content'
+    })
+  } catch (error) {
+    await showAlert({
+      title: 'Error',
+      message: (error as Error).message,
+      type: 'error'
+    })
+  } finally {
+    isSubmitingLogin.value = false;
+  }
 }
 </script>
 
@@ -38,7 +80,7 @@ const handleLogin = async () => {
           </div>
           <div class="row">
             <div class="col-md-6 col-lg-3 mx-auto d-grid">
-              <button class="btn btn-purple rounded-pill btn-lg bg-gradient" :disabled="isSubmitingLogin">
+              <button type="submit" class="btn btn-purple rounded-pill btn-lg bg-gradient" :disabled="isSubmitingLogin">
                 {{ isSubmitingLogin ? 'Enviando...' : 'Enviar' }}
               </button>
             </div>

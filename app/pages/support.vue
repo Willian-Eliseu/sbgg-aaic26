@@ -31,7 +31,7 @@ const handleSupport = async () => {
   isSubmittingSupport.value = true;
 
   try {
-    const data: any = await $fetch('https://eventos.tbr.com.br/apis/support/', {
+    const response: any = await $fetch('https://eventos.tbr.com.br/apis/support/', {
       method: 'POST',
       body: formData,
       headers: {
@@ -39,7 +39,9 @@ const handleSupport = async () => {
       }
     })
 
-    if (!data || data.estado != 1) {
+    const data = JSON.parse(response);
+
+    if (data.estado != 1) {
       throw new Error(data?.message ?? 'Erro ao enviar mensagem');
     }
 
@@ -152,7 +154,8 @@ onMounted(() => {
           </div>
           <div class="row">
             <div class="col-md-6 col-lg-3 mx-auto d-grid">
-              <button class="btn btn-purple rounded-pill btn-lg bg-gradient" :disabled="isSubmittingSupport">
+              <button type="submit" class="btn btn-purple rounded-pill btn-lg bg-gradient"
+                :disabled="isSubmittingSupport">
                 {{ isSubmittingSupport ? 'Enviando...' : 'Enviar' }}
               </button>
             </div>

@@ -40,7 +40,7 @@ const payNow = (): void => {
 
 const getPaymentLink = async (): Promise<void> => {
     try {
-        const response = await $fetch<PaymentResponse>(`https://eventos.tbr.com.br/apis/payment`, {
+        const response: any = await $fetch<PaymentResponse>(`https://eventos.tbr.com.br/apis/payment`, {
             method: 'POST',
             body: {
                 email: siteStore.email,
@@ -55,11 +55,13 @@ const getPaymentLink = async (): Promise<void> => {
             throw new Error('Erro ao obter o link de pagamento.');
         }
 
-        if (response.estado != 1) {
-            throw new Error(response.message || 'Erro ao obter o link de pagamento.');
+        const data = JSON.parse(response);
+
+        if (data.estado != 1) {
+            throw new Error(data.message || 'Erro ao obter o link de pagamento.');
         }
 
-        linkPagamento.value = response.link;
+        linkPagamento.value = data.link;
     } catch (error) {
         await showAlert({
             title: 'Error',
@@ -71,17 +73,19 @@ const getPaymentLink = async (): Promise<void> => {
 
 const verifyLogin = async (): Promise<void> => {
     try {
-        const response = await $fetch<ApiResponse<UserData>>(`https://eventos.tbr.com.br/apis/login/?evento=${siteStore.eventId}&email=${siteStore.email}`);
+        const response: any = await $fetch<ApiResponse<UserData>>(`https://eventos.tbr.com.br/apis/login/?evento=${siteStore.eventId}&email=${siteStore.email}`);
 
         if (!response) {
             throw new Error('Erro ao verificar o login.');
         }
 
-        if (response.estado != 1) {
-            throw new Error(response.message || 'Erro ao verificar o login.');
+        const data = JSON.parse(response);
+
+        if (data.estado != 1) {
+            throw new Error(data.message || 'Erro ao verificar o login.');
         }
 
-        const dados = response.dados;
+        const dados = data.dados;
         fullName.value = dados.firstname + ' ' + dados.lastname;
         treatment.value = dados.treatment;
         category.value = dados.categoria;

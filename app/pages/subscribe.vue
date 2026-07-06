@@ -84,7 +84,7 @@ const checkEmail = (): void => {
 const handleSubscribe = async (): Promise<void> => {
   isSubmittingSubscribe.value = true;
   try {
-    const data: any = await $fetch('https://eventos.tbr.com.br/apis/subscribe/', {
+    const response: any = await $fetch('https://eventos.tbr.com.br/apis/subscribe/', {
       method: 'POST',
       body: formData,
       headers: {
@@ -92,9 +92,11 @@ const handleSubscribe = async (): Promise<void> => {
       }
     });
 
-    if (!data) {
+    if (!response) {
       throw new Error('Erro ao se inscrever.');
     }
+
+    const data = JSON.parse(response);
 
     if (data.code != 1) {
       throw new Error(data.message || 'Erro ao se inscrever.');
@@ -196,6 +198,13 @@ onMounted(() => {
         <h1 class="text-center fw-bold text-purple">Inscrição</h1>
         <p class="fs-5 text-center mb-3">
           Webinar Highlights do Congresso Alzheimer's Association <br> International Conference (AAIC​ 2026)
+        </p>
+
+        <p class="fs-5 fw-semibold fst-italic text-center mb-0">
+          * Associados adimplentes da SBGG - Valor da inscrição R$ 49,90
+        </p>
+        <p class="fs-5 fw-semibold fst-italic text-center">
+          * Não Associados ou Não quites - Valor da inscrição R$ 179,90
         </p>
 
         <!-- support formulary -->
@@ -332,7 +341,8 @@ onMounted(() => {
           </div>
           <div class="row">
             <div class="col-md-6 col-lg-3 mx-auto d-grid">
-              <button class="btn btn-purple rounded-pill btn-lg bg-gradient" :disabled="isSubmittingSubscribe">
+              <button type="submit" class="btn btn-purple rounded-pill btn-lg bg-gradient"
+                :disabled="isSubmittingSubscribe">
                 {{ isSubmittingSubscribe ? 'Enviando...' : 'Enviar' }}
               </button>
             </div>

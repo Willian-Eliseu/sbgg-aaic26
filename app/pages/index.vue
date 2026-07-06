@@ -4,36 +4,36 @@ const speakersData = ref<Array<{ id: number, name: string, type: string, photo: 
     id: 1,
     name: 'Dra. Isabela Trindade',
     type: 'Moderadora',
-    photo: '@/assets/images/speakers/isabela-trindade.png',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+    photo: '/sbgg-aaic26/images/isabela-trindade.png',
+    about: 'Presidente do Depto. de Gerontologia da SBGG'
   },
   {
     id: 2,
     name: 'Dr. Charlys Barbosa Nogueira',
     type: 'Palestrante',
-    photo: '@/assets/images/speakers/charlys-barbosa-nogueira.png',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+    photo: '/sbgg-aaic26/images/charlys-barbosa-nogueira.png',
+    about: ''
   },
   {
     id: 3,
     name: 'Dra. Lais Bertola',
     type: 'Palestrante',
-    photo: '@/assets/images/speakers/lais-bertola.png',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+    photo: '/sbgg-aaic26/images/lais-bertola.png',
+    about: '2ª Vice-presidente do Depto. de Gerontologia da SBGG - MG'
   },
   {
     id: 4,
     name: 'Dr. Leonardo Brandão de Oliva',
     type: 'Palestrante',
-    photo: '@/assets/images/speakers/leonardo-brandao-de-oliva.png',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+    photo: '/sbgg-aaic26/images/leonardo-brandao-de-oliva.png',
+    about: 'Presidente da SBGG'
   },
   {
     id: 5,
     name: 'Dra. Maria Aparecida Bicalho',
     type: 'Palestrante',
-    photo: '@/assets/images/speakers/maria-aparecida-bicalho.png',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+    photo: '/sbgg-aaic26/images/maria-aparecida-bicalho.png',
+    about: ''
   },
 ])
 </script>
@@ -50,7 +50,7 @@ const speakersData = ref<Array<{ id: number, name: string, type: string, photo: 
                 WEBINAR
               </span>
             </p>
-            <img src="@/assets/images/aaic_white_art.webp" alt="Arte do AAIC 2026" class="w-75 d-block mx-auto">
+            <img src="~/assets/images/aaic_white_art.webp" alt="Arte do AAIC 2026" class="w-75 d-block mx-auto">
             <p class="text-center mb-0 py-3 fs-3 fw-semibold text-white">
               Terça-feira, dia 04 de agosto de 2026
               <br>
@@ -58,9 +58,8 @@ const speakersData = ref<Array<{ id: number, name: string, type: string, photo: 
             </p>
             <div class="row">
               <div class="col-auto mx-auto">
-                <button class="btn btn-secondary rounded-pill px-4 py-2 fs-5 fw-semibold">
-                  Inscrições abertas
-                </button>
+                <NuxtLink class="btn btn-secondary rounded-pill px-4 py-2 fs-5 fw-semibold" to="/subscribe">Inscrições
+                  abertas</NuxtLink>
               </div>
             </div>
           </div>
@@ -99,7 +98,8 @@ const speakersData = ref<Array<{ id: number, name: string, type: string, photo: 
         <div class="row justify-content-center">
           <div class="col-md-4" v-for="speaker in speakersData" :key="speaker.id">
             <div class="p-3">
-              <img :src="speaker.photo" :alt="`Foto do palestrante - ${speaker.name}`" class="w-75 d-block mx-auto">
+              <img :src="speaker.photo" :alt="`Foto do palestrante - ${speaker.name}`"
+                class="w-75 d-block mx-auto border-purple rounded-circle border border-3 shadow">
               <h4 class="fw-semibold text-center text-purple mb-0">
                 {{ speaker.name }}
               </h4>
