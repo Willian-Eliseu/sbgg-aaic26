@@ -1,29 +1,40 @@
 <script setup lang="ts">
-const speakersData = ref<Array<{ id: number, name: string, photo: string, about: string }>>([
+const speakersData = ref<Array<{ id: number, name: string, type: string, photo: string, about: string }>>([
   {
     id: 1,
-    name: 'Alexandre Kalil',
-    photo: '@/assets/images/speakers/alexandre-kalil.webp',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam at, minus iste eveniet suscipit ullam exercitationem eum quasi? Vero labore ab sequi alias distinctio? Ab animi asperiores nostrum facilis iste?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio similique incidunt alias ratione voluptatem harum cum quae at sit. Pariatur omnis consequuntur vero enim exercitationem neque dolorum officiis iure!'
+    name: 'Dra. Isabela Trindade',
+    type: 'Moderadora',
+    photo: '@/assets/images/speakers/isabela-trindade.png',
+    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
   },
   {
     id: 2,
-    name: 'Alexandre Kalil',
-    photo: '@/assets/images/speakers/alexandre-kalil.webp',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam at, minus iste eveniet suscipit ullam exercitationem eum quasi? Vero labore ab sequi alias distinctio? Ab animi asperiores nostrum facilis iste?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio similique incidunt alias ratione voluptatem harum cum quae at sit. Pariatur omnis consequuntur vero enim exercitationem neque dolorum officiis iure!'
+    name: 'Dr. Charlys Barbosa Nogueira',
+    type: 'Palestrante',
+    photo: '@/assets/images/speakers/charlys-barbosa-nogueira.png',
+    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
   },
   {
     id: 3,
-    name: 'Alexandre Kalil',
-    photo: '@/assets/images/speakers/alexandre-kalil.webp',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam at, minus iste eveniet suscipit ullam exercitationem eum quasi? Vero labore ab sequi alias distinctio? Ab animi asperiores nostrum facilis iste?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio similique incidunt alias ratione voluptatem harum cum quae at sit. Pariatur omnis consequuntur vero enim exercitationem neque dolorum officiis iure!'
+    name: 'Dra. Lais Bertola',
+    type: 'Palestrante',
+    photo: '@/assets/images/speakers/lais-bertola.png',
+    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
   },
   {
     id: 4,
-    name: 'Alexandre Kalil',
-    photo: '@/assets/images/speakers/alexandre-kalil.webp',
-    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam at, minus iste eveniet suscipit ullam exercitationem eum quasi? Vero labore ab sequi alias distinctio? Ab animi asperiores nostrum facilis iste?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio similique incidunt alias ratione voluptatem harum cum quae at sit. Pariatur omnis consequuntur vero enim exercitationem neque dolorum officiis iure!'
-  }
+    name: 'Dr. Leonardo Brandão de Oliva',
+    type: 'Palestrante',
+    photo: '@/assets/images/speakers/leonardo-brandao-de-oliva.png',
+    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+  },
+  {
+    id: 5,
+    name: 'Dra. Maria Aparecida Bicalho',
+    type: 'Palestrante',
+    photo: '@/assets/images/speakers/maria-aparecida-bicalho.png',
+    about: 'Lorem ipsum dolor sit amet consectetur adipisicing elit'
+  },
 ])
 </script>
 
@@ -64,11 +75,13 @@ const speakersData = ref<Array<{ id: number, name: string, photo: string, about:
           <div class="col-12">
             <h2 class="fw-bold text-purple">Sobre</h2>
             <p class="fs-5 mb-0">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam at, minus iste eveniet suscipit ullam
-              exercitationem eum quasi? Vero labore ab sequi alias distinctio? Ab animi asperiores nostrum facilis iste?
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio similique incidunt alias ratione
-              voluptatem harum cum quae at sit. Pariatur omnis consequuntur vero enim exercitationem neque dolorum
-              officiis iure!
+              A SBGG reuniu os principais destaques do Alzheimer’s Association International Conference® 2026 (AAIC®), o
+              maior e mais relevante evento mundial sobre Alzheimer e outras demências, realizado entre os dias 12 e 15
+              de julho, em Londres.
+            </p>
+            <p class="fs-5">
+              Participe do nosso webinar exclusivo, com os insights selecionados pela SBGG e certificado de participação
+              incluso.
             </p>
           </div>
         </div>
@@ -87,9 +100,12 @@ const speakersData = ref<Array<{ id: number, name: string, photo: string, about:
           <div class="col-md-4" v-for="speaker in speakersData" :key="speaker.id">
             <div class="p-3">
               <img :src="speaker.photo" :alt="`Foto do palestrante - ${speaker.name}`" class="w-75 d-block mx-auto">
-              <h4 class="fw-semibold text-center text-purple">
+              <h4 class="fw-semibold text-center text-purple mb-0">
                 {{ speaker.name }}
               </h4>
+              <p class="text-center mb-1 small">
+                {{ speaker.type }}
+              </p>
               <p class="text-center mb-0">
                 {{ speaker.about }}
               </p>

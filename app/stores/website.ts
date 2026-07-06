@@ -6,6 +6,7 @@ export interface UserData {
     firstname: string;
     lastname: string;
     email: string;
+    category: number;
     userId: number;
     userHash: string;
     userCity: string;
@@ -22,6 +23,7 @@ export const useSiteStore = defineStore('siteStore', {
         firstname: '',
         lastname: '',
         email: '',
+        category: 0,
         userId: 0,
         userHash: '',
         userCity: '',
@@ -43,6 +45,7 @@ export const useSiteStore = defineStore('siteStore', {
                             firstname: sessionData.firstname ?? '',
                             lastname: sessionData.lastname ?? '',
                             email: sessionData.email ?? '',
+                            category: sessionData.category ?? 0,
                             userId: sessionData.userId ?? 0,
                             userHash: sessionData.userHash ?? '',
                             userCity: sessionData.userCity ?? '',
@@ -65,6 +68,7 @@ export const useSiteStore = defineStore('siteStore', {
                 firstname: userData.firstname ?? '',
                 lastname: userData.lastname ?? '',
                 email: userData.email ?? '',
+                category: userData.category ?? 0,
                 userId: userData.userId ?? 0,
                 userHash: userData.userHash ?? '',
                 userCity: userData.userCity ?? '',
