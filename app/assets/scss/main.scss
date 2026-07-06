@@ -1,0 +1,13 @@
+$purple-custom: #4c1f60;
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "purple": $purple-custom
+  )
+);
+
+@import 'bootstrap/scss/bootstrap.scss';
